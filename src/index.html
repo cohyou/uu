@@ -1,0 +1,32 @@
+<html>
+<body>
+aa
+<div id="uu"></div>
+<script>
+ fetch('http://15.152.44.183:8127/json', {
+   mode: 'cors'
+})
+  .then((res) => {
+    console.log(res);
+    if (res.ok) {
+      return res.json();
+    } else {
+      console.log("res is not ok");
+      console.log(res.status);
+    }
+  })
+  .then((data) => {
+    console.log(data);
+alert(JSON.stringify(data));
+let text2 = document.getElementById('uu');
+  text2.textContent = JSON.stringify(data);
+})  
+.catch((error) => {
+    console.error('Error:', error);
+alert(error)
+  });
+let text2 = document.getElementById('uu');
+  text2.textContent = "data";
+</script>
+</body>
+</html>
