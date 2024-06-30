@@ -1,6 +1,7 @@
 extern crate uu;
 // use uu::*;
 use axum::{response::Html, routing::get, Router};
+// use http::{Request, Response};
 
 #[tokio::main]
 async fn main() {
@@ -16,5 +17,16 @@ async fn main() {
 }
 
 async fn handler() -> Html<&'static str> {
+    let resp = send();
+    println!("{:#?}", resp.await.unwrap());
     Html("<h1>Hello, World!</h1>")
+}
+
+use std::error::Error;
+async fn send() -> Result<String, Box<dyn Error>> {
+    let resp = reqwest::get("https://httpbin.org/ip")
+        .await?
+        .text()
+        .await?;
+    Ok(resp)
 }
