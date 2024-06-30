@@ -16,10 +16,10 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 
-async fn handler() -> Html<&'static str> {
+async fn handler() -> Html<String> {
     let resp = send();
-    println!("{:#?}", resp.await.unwrap());
-    Html("<h1>Hello, World!</h1>")
+    // println!("{:#?}", resp.await.unwrap());
+    Html(format!("<h1>Hello, World!</h1><body>res: {:#?}</body>", resp.await.unwrap()))
 }
 
 use std::error::Error;
